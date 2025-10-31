@@ -1,0 +1,20 @@
+{
+  "name": "simple-poll-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simple_poll_site.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "body-parser": "^2.2.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "nanoid": "^5.1.6"
+  }
+}
