@@ -110,6 +110,7 @@ function nowMs() { return Date.now(); }
 function daysToMs(d) { return d * 24*60*60*1000; }
 
 // -- Routes: Simple static landing & create UI --
+app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.send(`<!doctype html>
 <html>
