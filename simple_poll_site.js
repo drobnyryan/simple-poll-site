@@ -148,7 +148,7 @@ app.get('/', (req, res) => {
     <p>Create a poll and share the link. Polls auto-expire after 90 days.</p>
     <p><a href="/create">Build a Poll!</a></p>
     <p></p>
-    <p><a target="_blank" href="https://pollit.dev/c/kCJ3EUEJbx">Take a Poll!</a> - provide feedback on Poll It!</p>
+    <p><a target="_blank" href="http://pollit.dev/p/wPvOYa-qO5">Take a Poll!</a> - provide feedback on Poll It!</p>
     <hr />
   </div>
 </body>
