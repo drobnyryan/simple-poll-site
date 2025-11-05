@@ -56,3 +56,21 @@ input[type="checkbox"] {
 [data-qtype="multi"] label {
   text-align: left;
 }
+
+.site-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
