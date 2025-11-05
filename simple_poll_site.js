@@ -118,7 +118,7 @@ app.get('/', (req, res) => {
   <meta charset="utf-8" />
   <title>Simple Polls</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>body{font-family:system-ui,Segoe UI,Segoe,Arial;margin:40px} input,textarea,select{font-size:1rem;padding:8px;margin:6px 0;width:100%} .card{max-width:900px;margin:auto} .row{display:flex;gap:8px} .half{flex:1}</style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="card">
@@ -144,7 +144,7 @@ app.get('/create', (req, res) => {
   <meta charset="utf-8" />
   <title>Create Poll</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>body{font-family:system-ui;margin:20px} input,textarea,select{font-size:1rem;padding:8px;margin:6px 0;width:100%} .q{border:1px solid #ddd;padding:8px;margin:8px 0;border-radius:6px}</style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <h1>Build a new poll</h1>
