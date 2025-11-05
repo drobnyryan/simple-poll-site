@@ -116,21 +116,16 @@ app.get('/', (req, res) => {
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Simple Polls</title>
+  <title>Poll It! | Make simple polls</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="card">
-    <h1>Simple Polls</h1>
-    <p>Create a poll and share the taker link. Polls auto-expire after 90 days.</p>
+    <h1>Poll It!</h1>
+    <p>Create a poll and share the link. Polls auto-expire after 90 days.</p>
     <p><a href="/create">Build a new poll</a></p>
     <hr />
-    <h3>Have a creator link already?</h3>
-    <form action="/c/" method="get">
-      <input id="searchKey" type="text" placeholder="enter your creator key" />
-      <button type="submit">Open creator dashboard</button>
-    </form>
   </div>
 </body>
 </html>`);
@@ -172,7 +167,7 @@ app.get('/create', (req, res) => {
     function addQ(type){
       const div = document.createElement('div'); div.className='q';
       div.innerHTML = '<input placeholder="Question prompt" data-qprompt />' +
-        '<input placeholder="optional: placeholder/extra text" data-qplaceholder />' +
+        '<input placeholder="optional description or instructions" data-qplaceholder />' +
         '<div data-options style="margin-top:8px"></div>' +
         '<button type="button" onclick="this.parentNode.remove()">Remove question</button>';
       div.setAttribute('data-qtype', type);
@@ -216,6 +211,7 @@ app.get('/create', (req, res) => {
       }
     });
   </script>
+   <p><a href="/">Poll It!</a></p>
 </body>
 </html>`);
 });
@@ -265,7 +261,9 @@ app.get('/c/:creatorKey', (req, res) => {
   <div class="card">
   <h1>Creator dashboard</h1>
   <p><strong>Title:</strong> ${escapeHtml(poll.title)}</p>
-  <p><strong>Taker link:</strong> <a href="/p/${poll.poll_key}">${req.protocol}://${req.get('host')}/p/${poll.poll_key}</a></p>
+  <p><strong>Important:</strong>This is your only way to access your creator dashboard again:<a href="/c/${poll.creator_key}">
+     ${req.protocol}://${req.get('host')}/c/${poll.creator_key}</a></p>
+  <p><strong>Send poll takers this link:</strong> <a href="/p/${poll.poll_key}">${req.protocol}://${req.get('host')}/p/${poll.poll_key}</a></p>
   <p><strong>Expires at:</strong> ${new Date(poll.expires_at).toLocaleString()}</p>
   <h2>Questions</h2>
   <ol>
@@ -275,7 +273,7 @@ app.get('/c/:creatorKey', (req, res) => {
   <table border="1" cellpadding="6"><tr><th>responder id</th><th>submitted</th><th>answers (json)</th></tr>
   ${responses.map(r=>`<tr><td>${escapeHtml(r.responder_id)}</td><td>${new Date(r.submitted_at).toLocaleString()}</td><td><pre>${escapeHtml(r.answers)}</pre></td></tr>`).join('')}
   </table>
-  <p><a href="/">Back home</a></p>
+  <p><a href="/">Poll It!</a></p>
 </div></body></html>`);
 });
 
@@ -327,7 +325,9 @@ app.get('/p/:pollKey', (req, res) => {
       if(r.status===200){ document.getElementById('msg').innerText = 'Thanks! Response saved.'; form.reset(); } else { document.getElementById('msg').innerText = 'Error: '+(j.error||'unknown'); }
     });
   </script>
-</div></body></html>`);
+</div>
+<p><a href="/">Poll It!</a></p>
+</body></html>`);
 });
 
 // API: submit response
