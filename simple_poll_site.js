@@ -146,6 +146,7 @@ app.get('/create', (req, res) => {
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/styles.css">
 </head>
+<div class="card">
 <body>
   <h1>Build a new poll</h1>
   <form id="pollForm">
