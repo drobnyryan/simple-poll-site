@@ -261,6 +261,8 @@ app.get('/c/:creatorKey', (req, res) => {
   // simple HTML
   res.send(`<!doctype html>
 <html><head><meta charset="utf-8"><title>Creator - ${escapeHtml(poll.title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+ <link rel="stylesheet" href="/styles.css">
+  <div class="card">
   <h1>Creator dashboard</h1>
   <p><strong>Title:</strong> ${escapeHtml(poll.title)}</p>
   <p><strong>Taker link:</strong> <a href="/p/${poll.poll_key}">${req.protocol}://${req.get('host')}/p/${poll.poll_key}</a></p>
@@ -274,7 +276,7 @@ app.get('/c/:creatorKey', (req, res) => {
   ${responses.map(r=>`<tr><td>${escapeHtml(r.responder_id)}</td><td>${new Date(r.submitted_at).toLocaleString()}</td><td><pre>${escapeHtml(r.answers)}</pre></td></tr>`).join('')}
   </table>
   <p><a href="/">Back home</a></p>
-</body></html>`);
+</div></body></html>`);
 });
 
 // Poll taker page
@@ -284,7 +286,10 @@ app.get('/p/:pollKey', (req, res) => {
   if(!poll) return res.status(404).send('Poll not found');
   const questions = getQuestionsForPoll.all(poll.id);
   res.send(`<!doctype html>
-<html><head><meta charset="utf-8"><title>${escapeHtml(poll.title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<html><head><meta charset="utf-8"><title>${escapeHtml(poll.title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+ <link rel="stylesheet" href="/styles.css">
+  <div class="card">
+  <body>
   <h1>${escapeHtml(poll.title)}</h1>
   <form id="respForm">
     <label>Response ID (must be unique for this poll). It can be any string, or you can be assigned one by the creator.</label>
@@ -322,7 +327,7 @@ app.get('/p/:pollKey', (req, res) => {
       if(r.status===200){ document.getElementById('msg').innerText = 'Thanks! Response saved.'; form.reset(); } else { document.getElementById('msg').innerText = 'Error: '+(j.error||'unknown'); }
     });
   </script>
-</body></html>`);
+</div></body></html>`);
 });
 
 // API: submit response
