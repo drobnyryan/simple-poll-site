@@ -211,7 +211,14 @@ app.get('/create', (req, res) => {
       }
     });
   </script>
-   <p><a href="/">Poll It!</a></p>
+   <p><a href="/">Poll It! Home page</a></p>
+   <details>
+  <summary>How To</summary>
+  <p>Once created, each poll entry requires a unique text entry by the each taker. As the poll creator, you can instruct poll-takers to enter anything or you can assign specific keys or codes for them.</p>This is allows you more control over which responses you accept.</p>
+  <p><strong>Add Text Feild:</strong> A free-text box will be added - as the creator you only see it's Title & optional description.</p>
+  <p><strong>Add Single-Choice:</strong> Enables you to add multiple options, but only 1 can be selected by poll takers.</p>
+  <p>Add Multi-Choice:</strong> Same as Single-Choice, but poll takers can select as many options as they like.</p>
+</details>
 </body>
 </html>`);
 });
@@ -273,7 +280,7 @@ app.get('/c/:creatorKey', (req, res) => {
   <table border="1" cellpadding="6"><tr><th>responder id</th><th>submitted</th><th>answers (json)</th></tr>
   ${responses.map(r=>`<tr><td>${escapeHtml(r.responder_id)}</td><td>${new Date(r.submitted_at).toLocaleString()}</td><td><pre>${escapeHtml(r.answers)}</pre></td></tr>`).join('')}
   </table>
-  <p><a href="/">Poll It!</a></p>
+  <p><a href="/">Poll It! Home page</a></p>
 </div></body></html>`);
 });
 
@@ -326,7 +333,7 @@ app.get('/p/:pollKey', (req, res) => {
     });
   </script>
 </div>
-<p><a href="/">Poll It!</a></p>
+<p><a href="/">Poll It! Home page</a></p>
 </body></html>`);
 });
 
