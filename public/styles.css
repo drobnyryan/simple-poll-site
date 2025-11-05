@@ -1,0 +1,35 @@
+/* Base layout */
+body {
+  font-family: system-ui, Segoe UI, Segoe, Arial;
+  margin: 40px;
+}
+
+/* Form elements */
+input, textarea, select {
+  font-size: 1rem;
+  padding: 8px;
+  margin: 6px 0;
+  width: 100%;
+}
+
+/* Layout helpers */
+.card {
+  max-width: 900px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.half {
+  flex: 1;
+}
+
+.q {
+  border: 1px solid #ddd;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 6px;
+}
