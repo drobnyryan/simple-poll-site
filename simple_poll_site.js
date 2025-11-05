@@ -131,15 +131,6 @@ app.get('/', (req, res) => {
       <input id="searchKey" type="text" placeholder="enter your creator key" />
       <button type="submit">Open creator dashboard</button>
     </form>
-    <script>
-  document.getElementById('pollSearchForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const key = document.getElementById('searchKey').value.trim();
-    if (key) {
-      window.location.href = `/c/${key}`; // navigate to /c/:creatorKey
-    }
-  });
-</script>
   </div>
 </body>
 </html>`);
