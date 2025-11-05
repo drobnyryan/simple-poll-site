@@ -115,7 +115,7 @@ function renderPage(content) {
   <html>
     <head>
       <meta charset="utf-8" />
-      <title>Simple Polls</title>
+      <title>Poll It!</title>
       <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
@@ -123,7 +123,7 @@ function renderPage(content) {
         ${content}
       </div>
       <footer class="site-footer">
-        <p>© 2025 Simple Polls — <a href="/">Home</a></p>
+        <p>Poll It! — a site by <a href="rdrobny.me">Ryan Drobny</a> / <a href="/">Home</a></p>
       </footer>
     </body>
   </html>`;
