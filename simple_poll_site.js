@@ -109,10 +109,30 @@ function makeUrlKey() {
 function nowMs() { return Date.now(); }
 function daysToMs(d) { return d * 24*60*60*1000; }
 
+function renderPage(content) {
+  return `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>Simple Polls</title>
+      <link rel="stylesheet" href="/styles.css" />
+    </head>
+    <body>
+      <div class="card">
+        ${content}
+      </div>
+      <footer class="site-footer">
+        <p>© 2025 Simple Polls — <a href="/">Home</a></p>
+      </footer>
+    </body>
+  </html>`;
+}
+
 // -- Routes: Simple static landing & create UI --
 app.use(express.static('public'));
 app.get('/', (req, res) => {
-  res.send(`<!doctype html>
+  res.send(renderPage(`<!doctype html>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -128,12 +148,12 @@ app.get('/', (req, res) => {
     <hr />
   </div>
 </body>
-</html>`);
+</html>`));
 });
 
 // Serve create page
 app.get('/create', (req, res) => {
-  res.send(`<!doctype html>
+  res.send(renderPage(`<!doctype html>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -223,7 +243,7 @@ app.get('/create', (req, res) => {
   <p><strong>Note:</strong>Every poll will include a field for a unique poll ID. The system requires each poll response to have a unique poll ID. This enables poll creators (you) a little more control over the responses. Issue IDs (like passwords) to your poll takers so that you only get their answers (you can filter out any others). Or you can ignore this field! Poll takers will be instructed to add any random text if they were not provided an ID.</p>
 </details>
 </body>
-</html>`);
+</html>`));
 });
 
 // API: create poll
@@ -265,7 +285,7 @@ app.get('/c/:creatorKey', (req, res) => {
   const questions = getQuestionsForPoll.all(poll.id);
   const responses = getResponsesForPoll.all(poll.id);
   // simple HTML
-  res.send(`<!doctype html>
+  res.send(renderPage(`<!doctype html>
 <html><head><meta charset="utf-8"><title>Creator - ${escapeHtml(poll.title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
  <link rel="stylesheet" href="/styles.css">
   <div class="card">
@@ -284,7 +304,7 @@ app.get('/c/:creatorKey', (req, res) => {
   ${responses.map(r=>`<tr><td>${escapeHtml(r.responder_id)}</td><td>${new Date(r.submitted_at).toLocaleString()}</td><td><pre>${escapeHtml(r.answers)}</pre></td></tr>`).join('')}
   </table>
   <p><a href="/">Poll It! Home page</a></p>
-</div></body></html>`);
+</div></body></html>`));
 });
 
 // Poll taker page
@@ -293,7 +313,7 @@ app.get('/p/:pollKey', (req, res) => {
   const poll = getPollByPollKey.get(pk);
   if(!poll) return res.status(404).send('Poll not found');
   const questions = getQuestionsForPoll.all(poll.id);
-  res.send(`<!doctype html>
+  res.send(renderPage(`<!doctype html>
 <html><head><meta charset="utf-8"><title>${escapeHtml(poll.title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"></head>
  <link rel="stylesheet" href="/styles.css">
   <div class="card">
@@ -337,7 +357,7 @@ app.get('/p/:pollKey', (req, res) => {
   </script>
   <p><a href="/">Poll It! Home page</a></p>
 </div>
-</body></html>`);
+</body></html>`));
 });
 
 // API: submit response
