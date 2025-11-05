@@ -253,7 +253,7 @@ app.post('/api/polls', (req, res) => {
 
 // Creator dashboard
 app.get('/c/:creatorKey', (req, res) => {
-  const ck = req.query.creatorKey;
+  const ck = req.params.creatorKey;
   const poll = getPollByCreatorKey.get(ck);
   if(!poll) return res.status(404).send('Creator page not found');
   const questions = getQuestionsForPoll.all(poll.id);
