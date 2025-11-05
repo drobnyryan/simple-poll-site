@@ -123,7 +123,7 @@ function renderPage(content) {
         ${content}
       </div>
       <footer class="site-footer">
-        <p>Poll It! — a site by <a href="rdrobny.me">Ryan Drobny</a> / <a href="/">Home</a></p>
+        <p>Poll It! — a site by <a target="_blank href="https://www.rdrobny.me">Ryan Drobny</a> / <a href="/">Home</a></p>
       </footer>
     </body>
   </html>`;
