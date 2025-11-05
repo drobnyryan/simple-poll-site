@@ -214,10 +214,13 @@ app.get('/create', (req, res) => {
    <p><a href="/">Poll It! Home page</a></p>
    <details>
   <summary>How To</summary>
-  <p>Once created, each poll entry requires a unique text entry by the each taker. As the poll creator, you can instruct poll-takers to enter anything or you can assign specific keys or codes for them.</p>This is allows you more control over which responses you accept.</p>
+  <p><strong>First</strong>, give your poll an informative <strong>Title</strong>.</p>
+  <p><strong>Next, build your poll!</strong> This is where you determine what kinds of questions you want your poll takers to answer. This builder give you 3 options: free text fields where takers can type out their answers, single-choice questions where they can select one of the options you provide, or multi-choice questions where they can select any number of the options you give.</p>
+  <p>Each question type will prompt you for the question prompt itself and allow for an optional description/instruction field. You can leave this blank if you'd like.</p>
   <p><strong>Add Text Feild:</strong> A free-text box will be added - as the creator you only see it's Title & optional description.</p>
   <p><strong>Add Single-Choice:</strong> Enables you to add multiple options, but only 1 can be selected by poll takers.</p>
-  <p>Add Multi-Choice:</strong> Same as Single-Choice, but poll takers can select as many options as they like.</p>
+  <p><strong>Add Multi-Choice:</strong> Same as Single-Choice, but poll takers can select as many options as they like.</p>
+  <p><strong>Note:</strong>Every poll will include a field for a unique poll ID. The system requires each poll response to have a unique poll ID. This enables poll creators (you) a little more control over the responses. Issue IDs (like passwords) to your poll takers so that you only get their answers (you can filter out any others). Or you can ignore this field! Poll takers will be instructed to add any random text if they were not provided an ID.</p>
 </details>
 </body>
 </html>`);
@@ -332,8 +335,8 @@ app.get('/p/:pollKey', (req, res) => {
       if(r.status===200){ document.getElementById('msg').innerText = 'Thanks! Response saved.'; form.reset(); } else { document.getElementById('msg').innerText = 'Error: '+(j.error||'unknown'); }
     });
   </script>
+  <p><a href="/">Poll It! Home page</a></p>
 </div>
-<p><a href="/">Poll It! Home page</a></p>
 </body></html>`);
 });
 
