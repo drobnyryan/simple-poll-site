@@ -38,7 +38,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // -- DB setup --
-const db = new Database(path.join(__dirname, 'polls.db'));
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'polls.db');
+const db = new Database(dbPath);
 
 // create tables
 db.exec(`
