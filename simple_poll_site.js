@@ -372,12 +372,21 @@ function renderQuestionHtml(q){
   return '';
 }
 
-// Simple admin endpoint to list polls (for debugging) -- remove/secure in production
-app.get('/__admin/polls', (req,res)=>{
-  const rows = db.prepare('SELECT id,poll_key,creator_key,title,created_at,expires_at FROM polls ORDER BY created_at DESC').all();
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+
+app.get('/__admin/polls', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    if (req.query.token !== ADMIN_TOKEN) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+  }
+  
+  const rows = db.prepare(
+    'SELECT id,poll_key,creator_key,title,created_at,expires_at FROM polls ORDER BY created_at DESC'
+  ).all();
   res.json(rows);
 });
 
-app.listen(PORT, ()=>{
-  console.log('Server running on http://localhost:'+PORT);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
