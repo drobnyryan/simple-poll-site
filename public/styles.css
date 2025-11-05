@@ -5,7 +5,8 @@ body {
 }
 
 /* Form elements */
-input, textarea, select {
+input:not([type="radio"]):not([type="checkbox"]),
+textarea, select {
   font-size: 1rem;
   padding: 8px;
   margin: 6px 0;
@@ -32,4 +33,26 @@ input, textarea, select {
   padding: 8px;
   margin: 8px 0;
   border-radius: 6px;
+}
+
+/* Don't force radio/checkbox to width 100% */
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Make each option (radio/checkbox + label) align nicely */
+[data-qtype="single"] div,
+[data-qtype="multi"] div {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* spacing between input and text */
+}
+
+/* Ensure form content is left-aligned (in case parent is centered) */
+[data-qtype="single"] label,
+[data-qtype="multi"] label {
+  text-align: left;
 }
