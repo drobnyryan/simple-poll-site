@@ -144,7 +144,9 @@ app.get('/', (req, res) => {
   <div class="card">
     <h1>Poll It!</h1>
     <p>Create a poll and share the link. Polls auto-expire after 90 days.</p>
-    <p><a href="/create">Build a new poll</a></p>
+    <p><a href="/create">Build a Poll!</a></p>
+    <p></p>
+    <p><a target="_blank" href="https://pollit.dev/p/NYHyV0x6lb">Take a Poll!</a> - provide feedback on Poll It!</p>
     <hr />
   </div>
 </body>
@@ -231,16 +233,15 @@ app.get('/create', (req, res) => {
       }
     });
   </script>
-   <p><a href="/">Poll It! Home page</a></p>
    <details>
   <summary>How To</summary>
   <p><strong>First</strong>, give your poll an informative <strong>Title</strong>.</p>
   <p><strong>Next, build your poll!</strong> This is where you determine what kinds of questions you want your poll takers to answer. This builder give you 3 options: free text fields where takers can type out their answers, single-choice questions where they can select one of the options you provide, or multi-choice questions where they can select any number of the options you give.</p>
   <p>Each question type will prompt you for the question prompt itself and allow for an optional description/instruction field. You can leave this blank if you'd like.</p>
-  <p><strong>Add Text Feild:</strong> A free-text box will be added - as the creator you only see it's Title & optional description.</p>
+  <p><strong>Add Text Field:</strong> A free-text box will be added - as the creator you only see it's Title & optional description.</p>
   <p><strong>Add Single-Choice:</strong> Enables you to add multiple options, but only 1 can be selected by poll takers.</p>
   <p><strong>Add Multi-Choice:</strong> Same as Single-Choice, but poll takers can select as many options as they like.</p>
-  <p><strong>Note:</strong>Every poll will include a field for a unique poll ID. The system requires each poll response to have a unique poll ID. This enables poll creators (you) a little more control over the responses. Issue IDs (like passwords) to your poll takers so that you only get their answers (you can filter out any others). Or you can ignore this field! Poll takers will be instructed to add any random text if they were not provided an ID.</p>
+  <p><strong>Note: </strong>Every poll will include a field for a unique poll ID. The system requires each poll response to have a unique poll ID. This enables poll creators (you) a little more control over the responses. Issue IDs (like passwords) to your poll takers so that you only get their answers (you can filter out any others). Or you can ignore this field! Poll takers will be instructed to add any random text if they were not provided an ID.</p>
 </details>
 </body>
 </html>`));
@@ -303,7 +304,6 @@ app.get('/c/:creatorKey', (req, res) => {
   <table border="1" cellpadding="6"><tr><th>responder id</th><th>submitted</th><th>answers (json)</th></tr>
   ${responses.map(r=>`<tr><td>${escapeHtml(r.responder_id)}</td><td>${new Date(r.submitted_at).toLocaleString()}</td><td><pre>${escapeHtml(r.answers)}</pre></td></tr>`).join('')}
   </table>
-  <p><a href="/">Poll It! Home page</a></p>
 </div></body></html>`));
 });
 
@@ -320,7 +320,7 @@ app.get('/p/:pollKey', (req, res) => {
   <body>
   <h1>${escapeHtml(poll.title)}</h1>
   <form id="respForm">
-    <label>Response ID (must be unique for this poll). It can be any string, or you can be assigned one by the creator.</label>
+    <label>Unique Poll ID - if you were not provided one, enter any random text here.</label>
     <input name="responder_id" required />
     <div id="questions">
       ${questions.map(q=>renderQuestionHtml(q)).join('')}
@@ -355,7 +355,6 @@ app.get('/p/:pollKey', (req, res) => {
       if(r.status===200){ document.getElementById('msg').innerText = 'Thanks! Response saved.'; form.reset(); } else { document.getElementById('msg').innerText = 'Error: '+(j.error||'unknown'); }
     });
   </script>
-  <p><a href="/">Poll It! Home page</a></p>
 </div>
 </body></html>`));
 });
