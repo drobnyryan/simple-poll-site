@@ -128,9 +128,18 @@ app.get('/', (req, res) => {
     <hr />
     <h3>Have a creator link already?</h3>
     <form action="/c/" method="get">
-      <input name="key" placeholder="paste your creator key (from creator link)" />
+      <input id="searchKey" type="text" placeholder="enter your creator key" />
       <button type="submit">Open creator dashboard</button>
     </form>
+    <script>
+  document.getElementById('pollSearchForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const key = document.getElementById('searchKey').value.trim();
+    if (key) {
+      window.location.href = `/c/${key}`; // navigate to /c/:creatorKey
+    }
+  });
+</script>
   </div>
 </body>
 </html>`);
